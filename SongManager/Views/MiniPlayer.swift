@@ -7,15 +7,16 @@
 
 import SwiftUI
 
+/// Miniplayer for current song
 struct MiniPlayer: View {
-    @State private var artistName = "David Guetta"
-    @State private var songTitle = "Lovers on the Sun"
+    @State private var artistName = "Paddi Maddi"
+    @State private var songTitle = "Moood"
+    @State private var pauseButton = false
     var body: some View {
         VStack {
             HStack(spacing: 10) {
-                Image("david")
+                Image("p2")
                     .resizable()
-                    .offset(y: 13)
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 55, height: 55)
                     .clipShape(Circle())
@@ -32,23 +33,31 @@ struct MiniPlayer: View {
                 Button(action: {}) {
                     Image(systemName: "arrow.left.to.line")
                         .font(.title)
-                        .foregroundColor(.primary)
+                        .foregroundColor(Color("AppColor"))
                 }
                 
-                Button(action: {}) {
-                    Image(systemName: "pause.fill")
+                Button {
+                    pauseButton.toggle()
+                } label: {
+                    Image(systemName: pauseButton ? "pause.fill" : "play.fill")
                         .font(.title)
-                        .foregroundColor(.primary)
+                        .foregroundColor(Color("AppColor"))
                 }
                 
                 Button(action: {}) {
                     Image(systemName: "arrow.right.to.line")
                         .font(.title)
-                        .foregroundColor(.primary)
+                        .foregroundColor(Color("AppColor"))
                 }
             }
             .padding(.vertical)
-            .background(BlurView())
+            .padding(.horizontal, 10)
+            .background(
+                VStack(spacing: 0) {
+                    BlurView()
+                    
+                    Divider()
+                })
         }
     }
 }

@@ -19,25 +19,34 @@ struct TabBarView: View {
                             Label("Library", systemImage: "rectangle.stack.fill")
                         }
                     
-                    Text("Radio")
+                    Text("Playlist")
                         .tag(1)
+                        .tabItem {
+                            Label("Playlist", systemImage: "play.rectangle.on.rectangle.fill")
+                        }
+                    
+                    Text("Radio")
+                        .tag(2)
                         .tabItem {
                             Label("Radio", systemImage: "dot.radiowaves.left.and.right")
                         }
                     
-                    Text("Search")
-                        .tag(2)
+                    SearchView()
+                        .tag(3)
                         .tabItem {
                             Label("Search", systemImage: "magnifyingglass")
                         }
                 }
+                .tint(Color("AppColor"))
                 
                 MiniPlayer()
                     .frame(height: 80)
                     .padding(.bottom, proxy.safeAreaInsets.bottom)
                     .padding(.bottom)
+                    .onTapGesture {
+                        print("Miniplayer tapped")
+                    }
             }
-            .preferredColorScheme(.dark)
         }
     }
 }
