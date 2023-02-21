@@ -32,7 +32,7 @@ struct TabBarView: View {
                         }
                 }
                 
-                BlurView()
+                MiniPlayer()
                     .frame(height: 80)
                     .padding(.bottom, proxy.safeAreaInsets.bottom)
                     .padding(.bottom)
