@@ -16,6 +16,7 @@ struct MiniPlayer: View {
     var picHeight = UIScreen.main.bounds.height / 3
     @Binding var expand: Bool
     @Binding var closeMiniPlayer: Bool
+    @Binding var recognizing: Bool
     @State private var volume: CGFloat = 0
     @State private var offset : CGFloat = 0
     var body: some View {
@@ -199,6 +200,6 @@ struct MiniPlayer: View {
 
 struct MiniPlayer_Previews: PreviewProvider {
     static var previews: some View {
-        MiniPlayer(expand: .constant(true), closeMiniPlayer: .constant(false))
+        MiniPlayer(expand: .constant(true), closeMiniPlayer: .constant(false), recognizing: .constant(true))
     }
 }

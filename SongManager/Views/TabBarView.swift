@@ -11,6 +11,7 @@ struct TabBarView: View {
     @State private var current = 2
     @State private var expand = false
     @State private var closeMiniPlayer = false
+    @Binding var recognizing: Bool
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
@@ -49,7 +50,7 @@ struct TabBarView: View {
                 }
                 .tint(Color("AppColor"))
                 
-                MiniPlayer(expand: $expand, closeMiniPlayer: $closeMiniPlayer)
+                MiniPlayer(expand: $expand, closeMiniPlayer: $closeMiniPlayer, recognizing: $recognizing)
                     .padding(.bottom, !expand ? proxy.safeAreaInsets.bottom - 2 : 0)
                     .padding(!expand ? .bottom : .init(rawValue: 0))
                     .opacity(closeMiniPlayer ? 0 : 1)
@@ -60,6 +61,6 @@ struct TabBarView: View {
 
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView()
+        TabBarView(recognizing: .constant(true))
     }
 }

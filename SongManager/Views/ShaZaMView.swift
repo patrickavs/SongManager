@@ -15,11 +15,20 @@ struct ShaZaMView: View {
                 .font(.system(size: 150))
                 .foregroundColor(Color("AppColor"))
                 .scaleEffect(recognizing ? 1.5 : 1.0)
+                .animation(.easeInOut.repeatForever(), value: recognizing)
                 .onTapGesture {
-                    withAnimation {
-                        recognizing.toggle()
-                    }
+                    animation()
                 }
+        }
+    }
+    
+    func animation() {
+        var transaction = Transaction()
+        transaction.disablesAnimations = recognizing ? true : false
+        withTransaction(transaction) {
+            withAnimation {
+                recognizing.toggle()
+            }
         }
     }
 }
