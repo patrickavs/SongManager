@@ -8,5 +8,5 @@
 import Foundation
 
 final class SongManagerViewModel: ObservableObject {
-    
+    @Published var songs: [Song] = []
 }

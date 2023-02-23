@@ -32,7 +32,7 @@ struct SearchView: View {
                 .cornerRadius(12)
                 
                 LazyVGrid(columns: colums, spacing: 20) {
-                    ForEach(2...10, id: \.self) { index in
+                    ForEach(1...10, id: \.self) { index in
                         Image("p\(index)")
                             .resizable()
                             .cornerRadius(15)

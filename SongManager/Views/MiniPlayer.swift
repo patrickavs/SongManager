@@ -15,10 +15,14 @@ struct MiniPlayer: View {
     @State private var heartFill = false
     var picHeight = UIScreen.main.bounds.height / 3
     @Binding var expand: Bool
-    @State private var sliderAnimation: CGFloat = 0
+    @State private var volume: CGFloat = 0
+    @State private var offset : CGFloat = 0
     var body: some View {
         VStack {
             if expand {
+                Capsule()
+                    .frame(maxWidth: 100, maxHeight: 4)
+                    .foregroundColor(.black)
                 HStack {
                     Button {
                         print("line")
@@ -38,6 +42,7 @@ struct MiniPlayer: View {
                 .font(.title)
                 .padding(.horizontal)
                 .padding(.bottom)
+                .padding(.top, 5)
                 Spacer()
             }
             HStack(spacing: 10) {
@@ -131,7 +136,7 @@ struct MiniPlayer: View {
                         Image(systemName: "volume.2.fill")
                             .foregroundColor(Color("AppColor"))
                         
-                        Slider(value: $sliderAnimation)
+                        Slider(value: $volume)
                             .tint(Color("AppColor"))
                             
                     }
@@ -163,10 +168,28 @@ struct MiniPlayer: View {
             }
                 .onTapGesture {
                     withAnimation(.interactiveSpring(response: 0.5)) {
-                        expand.toggle()
+                        expand = true
                     }
-                }
-                .ignoresSafeArea())
+                })
+        .cornerRadius(expand ? 10 : 0)
+        .ignoresSafeArea(edges: .bottom)
+        .offset(y: offset)
+        .gesture(DragGesture().onEnded(onEnded(value:)).onChanged(onChanged(value:)))
+    }
+    
+    func onEnded(value: DragGesture.Value) {
+        withAnimation(.easeOut) {
+            if value.translation.height > picHeight {
+                expand = false
+            }
+            offset = 0
+        }
+    }
+    
+    func onChanged(value: DragGesture.Value) {
+        if value.translation.height > 0 && expand {
+            offset = value.translation.height
+        }
     }
 }
 
