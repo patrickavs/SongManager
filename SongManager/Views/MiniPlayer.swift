@@ -15,6 +15,7 @@ struct MiniPlayer: View {
     @State private var heartFill = false
     var picHeight = UIScreen.main.bounds.height / 3
     @Binding var expand: Bool
+    @Binding var closeMiniPlayer: Bool
     @State private var volume: CGFloat = 0
     @State private var offset : CGFloat = 0
     var body: some View {
@@ -98,7 +99,7 @@ struct MiniPlayer: View {
                         .font(.title3)
                         .padding(.bottom, 50)
                     
-                    ZStack {
+                    ZStack(alignment: .leading) {
                         Capsule()
                             .fill(.primary.opacity(0.1))
                             .frame(maxWidth: .infinity, maxHeight: 4)
@@ -143,7 +144,10 @@ struct MiniPlayer: View {
                     .padding(.top, 40)
                     
                     Button {
-                        print("stop")
+                        withAnimation {
+                            closeMiniPlayer = true
+                            expand = false
+                        }
                     } label: {
                         Image(systemName: "stop.fill")
                             .padding(.top, 40)
@@ -195,6 +199,6 @@ struct MiniPlayer: View {
 
 struct MiniPlayer_Previews: PreviewProvider {
     static var previews: some View {
-        MiniPlayer(expand: .constant(true))
+        MiniPlayer(expand: .constant(true), closeMiniPlayer: .constant(false))
     }
 }

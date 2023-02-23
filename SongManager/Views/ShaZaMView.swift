@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct ShaZaMView: View {
+    @State private var recognizing = false
     var body: some View {
-        Text("ShaZaM")
+        VStack {
+            Image(systemName: "dot.radiowaves.left.and.right")
+                .font(.system(size: 150))
+                .foregroundColor(Color("AppColor"))
+                .scaleEffect(recognizing ? 1.5 : 1.0)
+                .onTapGesture {
+                    withAnimation {
+                        recognizing.toggle()
+                    }
+                }
+        }
     }
 }
 
