@@ -33,8 +33,14 @@ struct TabBarView: View {
                                 Label("Radio", systemImage: "dot.radiowaves.left.and.right")
                             }
                         
-                        SearchView()
+                        ShaZaMView()
                             .tag(3)
+                            .tabItem {
+                                Label("ShaZaM", systemImage: "iphone.homebutton.radiowaves.left.and.right")
+                            }
+                        
+                        SearchView()
+                            .tag(4)
                             .tabItem {
                                 Label("Search", systemImage: "magnifyingglass")
                             }
