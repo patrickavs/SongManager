@@ -15,6 +15,7 @@ struct ShaZaMView: View {
                 .font(.system(size: 150))
                 .foregroundColor(Color("AppColor"))
                 .scaleEffect(recognizing ? 1.5 : 1.0)
+                .opacity(recognizing ? 0.5 : 1)
                 .animation(.easeInOut.repeatForever(), value: recognizing)
                 .onTapGesture {
                     animation()

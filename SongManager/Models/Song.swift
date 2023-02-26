@@ -11,7 +11,13 @@ struct Song: Identifiable {
     let id = UUID()
     let title: String
     let artist: String
-    let genre: Genre
+    let image: String
+    
+    init(album: Album) {
+        self.title = album.album.name
+        self.artist = album.album.artist
+        self.image = album.album.image.first?.text ?? "No image available"
+    }
 }
 
 enum Genre: CaseIterable {
