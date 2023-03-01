@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @State private var current = 2
+    @State private var current = 3
     @State private var expand = false
     @State private var closeMiniPlayer = false
     @Binding var recognizing: Bool
@@ -23,26 +23,20 @@ struct TabBarView: View {
                                 Label("Library", systemImage: "rectangle.stack.fill")
                             }
                         
-                        PlaylistView()
-                            .tag(1)
-                            .tabItem {
-                                Label("Playlist", systemImage: "play.rectangle.on.rectangle.fill")
-                            }
-                        
                         RadioView()
-                            .tag(2)
+                            .tag(1)
                             .tabItem {
                                 Label("Radio", systemImage: "dot.radiowaves.left.and.right")
                             }
                         
                         ShaZaMView()
-                            .tag(3)
+                            .tag(2)
                             .tabItem {
                                 Label("ShaZaM", systemImage: "iphone.homebutton.radiowaves.left.and.right")
                             }
                         
                         SearchView()
-                            .tag(4)
+                            .tag(3)
                             .tabItem {
                                 Label("Search", systemImage: "magnifyingglass")
                             }

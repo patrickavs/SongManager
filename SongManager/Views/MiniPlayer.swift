@@ -19,6 +19,7 @@ struct MiniPlayer: View {
     @Binding var recognizing: Bool
     @State private var volume: CGFloat = 0
     @State private var offset : CGFloat = 0
+    @State private var circleOffset: CGFloat = 0
     var body: some View {
         VStack {
             if expand {
@@ -31,7 +32,7 @@ struct MiniPlayer: View {
                     } label: {
                         Image(systemName: "line.horizontal.3")
                     }
-
+                    
                     Spacer()
                     Image(systemName: heartFill ? "heart.fill" : "heart")
                         .onTapGesture {
@@ -45,7 +46,6 @@ struct MiniPlayer: View {
                 .padding(.horizontal)
                 .padding(.bottom)
                 .padding(.top, 5)
-                Spacer()
             }
             HStack(spacing: 10) {
                 if expand{Spacer()}
@@ -100,16 +100,26 @@ struct MiniPlayer: View {
                         .font(.title3)
                         .padding(.bottom, 50)
                     
-                    ZStack(alignment: .leading) {
+                    ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
                         Capsule()
                             .fill(.primary.opacity(0.1))
-                            .frame(maxWidth: .infinity, maxHeight: 4)
+                            .frame(maxHeight: 4)
+                        
+                        Capsule()
+                            .fill(Color("AppColor"))
+                            .frame(maxWidth: circleOffset + 15, maxHeight: 4)
                         
                         Circle()
-                            .frame(width: 10, height: 10)
-                            .gesture(DragGesture())
-                            .foregroundColor(Color("AppColor"))
+                            .fill(.ultraThinMaterial)
+                            .frame(width: 25, height: 25)
+                            .offset(x: circleOffset)
+                        Circle()
+                            .strokeBorder(Color("AppColor"), lineWidth: 4)
+                            .frame(width: 25, height: 25)
+                            .offset(x: circleOffset)
+                        
                     }
+                    .gesture(DragGesture().onChanged(onChangedCircle(value:)))
                     
                     HStack(spacing: 15) {
                         Button(action: {}) {
@@ -140,9 +150,11 @@ struct MiniPlayer: View {
                         
                         Slider(value: $volume)
                             .tint(Color("AppColor"))
-                            
+                        
                     }
                     .padding(.top, 40)
+                    
+                    Spacer()
                     
                     Button {
                         withAnimation {
@@ -151,16 +163,16 @@ struct MiniPlayer: View {
                         }
                     } label: {
                         Image(systemName: "stop.fill")
-                            .padding(.top, 40)
                             .font(.title)
                             .foregroundColor(Color("AppColor"))
                     }
-
+                    
+                    Spacer()
+                    
                 }
                 .padding(.horizontal)
                 .padding(.top)
                 
-                Spacer()
                 Spacer()
             }
         }
@@ -194,6 +206,12 @@ struct MiniPlayer: View {
     func onChanged(value: DragGesture.Value) {
         if value.translation.height > 0 && expand {
             offset = value.translation.height
+        }
+    }
+    
+    func onChangedCircle(value: DragGesture.Value) {
+        if value.location.x >= 0 && value.location.x <= UIScreen.main.bounds.width - 50 {
+            circleOffset = value.location.x
         }
     }
 }

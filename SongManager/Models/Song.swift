@@ -16,7 +16,7 @@ struct Song: Identifiable {
     init(album: Album) {
         self.title = album.album.name
         self.artist = album.album.artist
-        self.image = album.album.image.first?.text ?? "No image available"
+        self.image = album.album.image.first?.text ?? "doc.text.image"
     }
 }
 
