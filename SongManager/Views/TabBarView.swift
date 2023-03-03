@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct TabBarView: View {
-    @State private var current = 3
+    @State private var current = 0
     @State private var expand = false
     @State private var closeMiniPlayer = false
+    @State private var tabbarInvisisble = false
     @Binding var recognizing: Bool
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                 TabView(selection: $current) {
-                    if !expand {
-                        LibraryView()
+                    if !expand && !tabbarInvisisble {
+                        LibraryView(tabbarInvisisble: $tabbarInvisisble, closeMiniPlayer: $closeMiniPlayer)
                             .tag(0)
                             .tabItem {
                                 Label("Library", systemImage: "rectangle.stack.fill")

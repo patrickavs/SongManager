@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D05EE9F29B0D38700947222 /* SlidingTabView in Frameworks */ = {isa = PBXBuildFile; productRef = 7D05EE9E29B0D38700947222 /* SlidingTabView */; };
+		7D05EEA129B0DA7100947222 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D05EEA029B0DA7100947222 /* SideBarView.swift */; };
 		7D0E323529A79CD60074F7A2 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E323429A79CD60074F7A2 /* LibraryView.swift */; };
 		7D0E323729A79CF60074F7A2 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E323629A79CF60074F7A2 /* PlaylistView.swift */; };
 		7D0E323929A79D110074F7A2 /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0E323829A79D110074F7A2 /* RadioView.swift */; };
@@ -27,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D05EEA029B0DA7100947222 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		7D0E323429A79CD60074F7A2 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		7D0E323629A79CF60074F7A2 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
 		7D0E323829A79D110074F7A2 /* RadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
@@ -52,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D05EE9F29B0D38700947222 /* SlidingTabView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +129,7 @@
 				7D0E323829A79D110074F7A2 /* RadioView.swift */,
 				7D0E323A29A79F110074F7A2 /* SplashScreen.swift */,
 				7D0E323C29A7B70A0074F7A2 /* ShaZaMView.swift */,
+				7D05EEA029B0DA7100947222 /* SideBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -154,6 +159,9 @@
 			dependencies = (
 			);
 			name = SongManager;
+			packageProductDependencies = (
+				7D05EE9E29B0D38700947222 /* SlidingTabView */,
+			);
 			productName = SongManager;
 			productReference = 7DED008629A379E200456826 /* SongManager.app */;
 			productType = "com.apple.product-type.application";
@@ -182,6 +190,9 @@
 				Base,
 			);
 			mainGroup = 7DED007D29A379E200456826;
+			packageReferences = (
+				7D05EE9D29B0D38700947222 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+			);
 			productRefGroup = 7DED008729A379E200456826 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -209,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D0E323B29A79F110074F7A2 /* SplashScreen.swift in Sources */,
+				7D05EEA129B0DA7100947222 /* SideBarView.swift in Sources */,
 				7D0E323929A79D110074F7A2 /* RadioView.swift in Sources */,
 				7DED009B29A37A2500456826 /* Song.swift in Sources */,
 				7DED008C29A379E200456826 /* ContentView.swift in Sources */,
@@ -423,6 +435,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7D05EE9D29B0D38700947222 /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7D05EE9E29B0D38700947222 /* SlidingTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D05EE9D29B0D38700947222 /* XCRemoteSwiftPackageReference "SlidingTabView" */;
+			productName = SlidingTabView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7DED007E29A379E200456826 /* Project object */;
 }

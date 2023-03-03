@@ -6,68 +6,55 @@
 //
 
 import SwiftUI
+import SlidingTabView
 
 struct LibraryView: View {
-    @Namespace var topID
-    @Namespace var bottomID
+    @State private var tabIndex = 0
+    @State private var toolbarTapped = false
+    @Binding var tabbarInvisisble: Bool
+    @Binding var closeMiniPlayer: Bool
+    var tabs: [String] = ["Songs", "Playlists", "Artists"]
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView {
-                Button {
-                    withAnimation {
-                        proxy.scrollTo(bottomID)
-                    }
-                } label: {
-                    Text("scrollBottom")
-                }
-                .id(topID)
-                
+        NavigationStack {
+            ZStack {
                 VStack {
-                    ForEach(1...100, id: \.self) { index in
-                        Text("Song \(index)")
+                    SlidingTabView(selection: $tabIndex, tabs: tabs, animation: .easeInOut, activeAccentColor: Color("AppColor"), selectionBarColor: Color("AppColor"))
+                    
+                    Spacer()
+                    
+                    switch tabIndex {
+                    case 0:
+                        Text("Songs")
+                    case 1:
+                        PlaylistView()
+                    case 2:
+                        Text("Artists")
+                    default:
+                        Text("")
                     }
-                    .onDelete { indexSet in
-                        print("onDelete")
-                    }
-                    .onMove { indexSet, index in
-                        print("onMove")
+                    
+                    Spacer()
+                }
+                //.opacity(toolbarTapped ? 0.2 : 1)
+                .navigationTitle("SongManager")
+                .toolbar(toolbarTapped ? .hidden : .visible, for: .navigationBar)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            withAnimation(.easeInOut(duration: 0.2)) {
+                                toolbarTapped = true
+                                tabbarInvisisble = true
+                                closeMiniPlayer = true
+                            }
+                        } label: {
+                            Image(systemName: "line.3.horizontal")
+                                .foregroundColor(Color("AppColor"))
+                        }
                     }
                 }
-                
-                Button {
-                    withAnimation {
-                        proxy.scrollTo(topID)
-                    }
-                } label: {
-                    Text("scrollTop")
-                }
-                .id(bottomID)
+                SideBarView(toolbarTapped: $toolbarTapped)
+                    
             }
-            
-            //.navigationTitle("Library")
-            /*.toolbar {
-             ToolbarItem(placement: .navigationBarTrailing) {
-             EditButton()
-             }
-             
-             ToolbarItem(placement: .navigationBarLeading) {
-             Button {
-             proxy.scrollTo(bottomID)
-             } label: {
-             Text("Scroll to Bottom")
-             }
-             .id(topID)
-             }
-             
-             ToolbarItem(placement: .bottomBar) {
-             Button {
-             proxy.scrollTo(topID)
-             } label: {
-             Text("scroll to top")
-             }
-             .id(bottomID)
-             }
-             }*/
         }
     }
 }
@@ -75,6 +62,6 @@ struct LibraryView: View {
 
 struct LibraryView_Previews: PreviewProvider {
     static var previews: some View {
-        LibraryView()
+        LibraryView(tabbarInvisisble: .constant(true), closeMiniPlayer: .constant(true))
     }
 }
