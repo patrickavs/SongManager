@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabBarView(recognizing: .constant(true))
+        TabBarView(vm: SongManagerViewModel(), recognizing: .constant(true))
     }
 }
 

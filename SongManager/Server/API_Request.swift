@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 public class API_Request {
-    public func getServerData(method: String, artist: String, song: String) {
+    public func getAlbumData(method: String, artist: String, song: String) {
         let api_key = "4f2e17301459a08ec39eefc446f15d8f"
         let album = song
         let format = "json"
@@ -48,7 +48,8 @@ public class API_Request {
                     print("finished")
                 }
             } receiveValue: { album in
-                print(album.album.url)
+                let songs = Song(album: album)
+                print(songs.artist)
             }
             .store(in: &cancellables)
     }

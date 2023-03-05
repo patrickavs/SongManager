@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TabBarView: View {
+    @ObservedObject var vm: SongManagerViewModel
     @State private var current = 0
     @State private var expand = false
     @State private var closeMiniPlayer = false
@@ -17,8 +18,8 @@ struct TabBarView: View {
         GeometryReader { proxy in
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                 TabView(selection: $current) {
-                    if !expand && !tabbarInvisisble {
-                        LibraryView(tabbarInvisisble: $tabbarInvisisble, closeMiniPlayer: $closeMiniPlayer)
+                    if !expand {
+                        LibraryView(vm: SongManagerViewModel(), tabbarInvisisble: $tabbarInvisisble, closeMiniPlayer: $closeMiniPlayer)
                             .tag(0)
                             .tabItem {
                                 Label("Library", systemImage: "rectangle.stack.fill")
@@ -56,6 +57,6 @@ struct TabBarView: View {
 
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarView(recognizing: .constant(true))
+        TabBarView(vm: SongManagerViewModel(), recognizing: .constant(true))
     }
 }
